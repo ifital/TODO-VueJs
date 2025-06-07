@@ -1,9 +1,9 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
-
 <template>
   <main>
-    <TheWelcome />
+    <TodoList />
   </main>
 </template>
+
+<script setup>
+import TodoList from '@/components/TodoList.vue'
+</script>
