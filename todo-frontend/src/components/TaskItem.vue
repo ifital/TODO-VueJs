@@ -38,7 +38,7 @@ const updateTask = async () => {
 
 const deleteTask = async () => {
   if (confirm('Supprimer cette tâche ?')) {
-    await axios.delete(`http://127.0.0.1:5000/api/tasks/${props.task.id}`)
+    await axios.delete(`http://127.0.0.1:8000/api/tasks/${props.task.id}`)
     emit('deleted')
   }
 }
