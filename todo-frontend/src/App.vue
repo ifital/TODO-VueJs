@@ -8,7 +8,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { taskService } from './services/taskService'
 import TaskForm from './components/TaskForm.vue'
 import TaskList from './components/TaskList.vue'
 
@@ -16,12 +16,9 @@ const tasks = ref([])
 
 const fetchTasks = async () => {
   try {
-    const res = await axios.get('http://127.0.0.1:8000/api/tasks')
-    // Vérifie si les tâches sont dans res.data.data
-    tasks.value = Array.isArray(res.data) ? res.data : res.data.data
-    console.log('Tâches récupérées :', tasks.value)
+    tasks.value = await taskService.getAllTasks()
   } catch (error) {
-    console.error('Erreur lors de la récupération des tâches :', error)
+    console.error('Erreur de récupération des tâches :', error)
   }
 }
 

@@ -8,21 +8,18 @@
 
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
+import { taskService } from '../services/taskService'
 
 const emit = defineEmits(['task-added'])
 
 const title = ref('')
 const description = ref('')
 
-const submit = async () => {
-  await axios.post('http://127.0.0.1:8000/api/tasks', {
+const submitTask = async () => {
+  await taskService.createTask({
     title: title.value,
-    description: description.value,
+    description: description.value
   })
-
-  title.value = ''
-  description.value = ''
   emit('task-added')
 }
 </script>

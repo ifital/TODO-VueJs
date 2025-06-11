@@ -18,7 +18,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
+import { taskService } from '../services/taskService'
+
 
 const props = defineProps(['task'])
 const emit = defineEmits(['updated', 'deleted'])
@@ -28,7 +29,7 @@ const editTitle = ref(props.task.title)
 const editDescription = ref(props.task.description)
 
 const updateTask = async () => {
-  await axios.put(`http://127.0.0.1:8000/api/tasks/${props.task.id}`, {
+  await taskService.updateTask(props.task.id, {
     title: editTitle.value,
     description: editDescription.value,
   })
@@ -38,10 +39,11 @@ const updateTask = async () => {
 
 const deleteTask = async () => {
   if (confirm('Supprimer cette tâche ?')) {
-    await axios.delete(`http://127.0.0.1:8000/api/tasks/${props.task.id}`)
+    await taskService.deleteTask(props.task.id)
     emit('deleted')
   }
 }
+
 
 const cancelEdit = () => {
   editing.value = false
