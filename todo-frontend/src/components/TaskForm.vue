@@ -15,11 +15,15 @@ const emit = defineEmits(['task-added'])
 const title = ref('')
 const description = ref('')
 
-const submitTask = async () => {
+const submit = async () => {
+
   await taskService.createTask({
     title: title.value,
     description: description.value
   })
+  title.value = ''
+  description.value = ''
   emit('task-added')
 }
+
 </script>
